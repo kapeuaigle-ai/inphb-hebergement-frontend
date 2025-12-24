@@ -2,18 +2,14 @@ import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { FaUserCircle, FaBell, FaSearch } from 'react-icons/fa';
 
-const Navbar = ({ pageTitle = 'Tableau de bord' }) => {
+const Navbar = () => {
     const { user } = useAuth();
 
     return (
-        <header className="h-14 sm:h-16 lg:h-20 bg-white border-b border-gray-100 flex items-center justify-between px-3 sm:px-6 lg:px-8 sticky top-0 z-20 shadow-sm">
-            <div className="flex items-center space-x-2 sm:space-x-4 lg:space-x-12 flex-1">
-                {/* Page Title - Mobile Optimized */}
-                <h2 className="text-sm sm:text-lg lg:text-xl font-bold text-text-primary truncate max-w-[140px] sm:max-w-none">
-                    {pageTitle}
-                </h2>
+        <header className="h-16 lg:h-20 bg-white border-b border-gray-100 flex items-center justify-between px-4 sm:px-6 lg:px-8 sticky top-0 z-20">
+            <div className="flex items-center space-x-4 lg:space-x-12 flex-1 lg:ml-16">
+                <h2 className="text-lg lg:text-xl font-bold text-text-primary hidden sm:block">Tableau de bord</h2>
 
-                {/* Search Bar - Hidden on mobile */}
                 <div className="relative hidden lg:block">
                     <input
                         type="text"
@@ -24,33 +20,24 @@ const Navbar = ({ pageTitle = 'Tableau de bord' }) => {
                 </div>
             </div>
 
-            <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-6">
-                {/* Notification Bell - Visible on mobile */}
-                <button className="relative p-2 text-gray-400 hover:text-primary transition-preset">
-                    <FaBell size={18} className="sm:hidden" />
-                    <FaBell size={20} className="hidden sm:block" />
+            <div className="flex items-center space-x-3 lg:space-x-6">
+                <button className="relative p-2 text-gray-400 hover:text-primary transition-preset hidden sm:block">
+                    <FaBell size={20} />
                     <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
                 </button>
 
-                {/* Divider - Hidden on mobile */}
-                <div className="h-6 sm:h-8 w-px bg-gray-100 hidden sm:block"></div>
+                <div className="h-8 w-px bg-gray-100 mx-2 hidden sm:block"></div>
 
-                {/* User Info */}
                 <div className="flex items-center space-x-2 lg:space-x-3">
-                    {/* User Name - Hidden on mobile */}
                     <div className="text-right hidden md:block">
-                        <p className="text-sm font-bold text-text-primary leading-none truncate max-w-[120px]">
-                            {user?.nom || 'Utilisateur'}
-                        </p>
+                        <p className="text-sm font-bold text-text-primary leading-none">{user?.nom || 'Utilisateur'}</p>
                         <p className="text-[10px] text-text-secondary font-medium mt-1 uppercase tracking-wider">
-                            {user?.role === 'ADMIN' ? 'Admin' : 'Gestion'}
+                            {user?.role === 'ADMIN' ? 'Administrateur' : 'Gestionnaire'}
                         </p>
                     </div>
-                    {/* User Avatar */}
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white shadow-md">
-                        <FaUserCircle size={20} className="sm:hidden" />
-                        <FaUserCircle size={24} className="hidden sm:block lg:hidden" />
-                        <FaUserCircle size={28} className="hidden lg:block" />
+                    <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gray-100 rounded-full flex items-center justify-center text-primary">
+                        <FaUserCircle size={28} className="lg:hidden" />
+                        <FaUserCircle size={32} className="hidden lg:block" />
                     </div>
                 </div>
             </div>
